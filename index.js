@@ -34,7 +34,6 @@ app.get('/', function(req, res) {
     }, function (error, response, body) {
       var targetUrl = response.request.uri.href;
       if (!error) {
-        console.log(response.request.uri);
         console.log('Request @'+(new Date()));
         console.log('-->'+url);
         res.redirect(url);
