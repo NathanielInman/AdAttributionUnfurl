@@ -15,6 +15,11 @@ app.get('/', function(req, res) {
     if(key!=='url')url+='&'+key+'=';
     url+=req.query[key];
   });
+  
+  // Now validate that query is acceptable, or even there before continuing
+  if(url.indexOf('http')<0||!url.length){
+    res.status(400).send({ error: 'Url parameter is missing or invalid.'  });
+  }
 
   // Make sure to separate the secure protocol library
   if(url.indexOf('https')<0){
