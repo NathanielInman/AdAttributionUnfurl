@@ -45,6 +45,7 @@ app.get('/', function(req, res) {
   function getUrlFailed(error){
     res.send(err);
   } //end geturlFailed()
+  //res.set("Connection", "close");
 });
 
 app.listen(5000);
