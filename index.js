@@ -4,6 +4,12 @@ var express = require('express'),
     http = require('follow-redirects').http,
     https = require('follow-redirects').https;
 
+process.on('uncaughtException', function(err){
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~');
+  console.error(err);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~');
+});
+
 app.use(cors());
 
 app.get('/', function(req, res) {
@@ -16,7 +22,8 @@ app.get('/', function(req, res) {
     url+=req.query[key];
   });
   
-  // Now validate that query is acceptable, or even there before continuing
+  // Make sure to separate the secure protocol library as well as start out with
+  // validating that the query is acceptable
   if(url.indexOf('http')<0||!url.length){
     res.status(400).send({ error: 'Url parameter is missing or invalid.'  });
   }else if(url.indexOf('https')<0){
@@ -30,7 +37,8 @@ app.get('/', function(req, res) {
   } //end if
 
   function getUrl(response){
-    console.log(response.fetchedUrls);
+    console.log('Request #'+req.connection.remoteAddress+'@'+(new Date()));
+    console.log('--->'+response.fetchedUrls[0]);
     res.redirect(response.fetchedUrls[0])
   } //end getUrl()
 
