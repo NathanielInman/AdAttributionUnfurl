@@ -7,10 +7,17 @@ var express = require('express'),
 app.use(cors());
 
 app.get('/', function(req, res) {
-  var url = req.query.url,
-      secure = req.query.secure||false;
+  var url=''; //holds the passed url parameter
 
-  if(secure){
+  // Reconstruct all of the queries to make it into one query. We are 
+  // not dissecting the queries, the proxied destination servers process them
+  Object.keys(req.query).forEach(function(key){
+    if(key!=='url')url+='&'+key+'=';
+    url+=req.query[key];
+  });
+
+  // Make sure to separate the secure protocol library
+  if(url.indexOf('https')<0){
     http
       .get(url, getUrl)
       .on('error', getUrlFailed);
@@ -21,7 +28,8 @@ app.get('/', function(req, res) {
   } //end if
 
   function getUrl(response){
-    res.send(response.fetchedUrls);
+    res.redirect('http://www.google.com/?nate=isawesome')
+//    res.send(response.fetchedUrls);
   } //end getUrl()
 
   function getUrlFailed(error){
