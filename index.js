@@ -28,8 +28,8 @@ app.get('/', function(req, res) {
   } //end if
 
   function getUrl(response){
-    res.redirect('http://www.google.com/?nate=isawesome')
-//    res.send(response.fetchedUrls);
+    console.log(response.fetchedUrls);
+    res.redirect(response.fetchedUrls[0])
   } //end getUrl()
 
   function getUrlFailed(error){
