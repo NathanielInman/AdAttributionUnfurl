@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "gulp test"
+    "deploy": "./deploy_production.sh"
   },
   "repository": {
     "type": "git",
