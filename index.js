@@ -2,6 +2,7 @@ var express = require('express'),
     cors = require('cors');
     app = express(),
     http = require('follow-redirects').http,
+    request = require('request'),
     https = require('follow-redirects').https;
 
 process.on('uncaughtException', function(err){
@@ -26,26 +27,22 @@ app.get('/', function(req, res) {
   // validating that the query is acceptable
   if(url.indexOf('http')<0||!url.length){
     res.status(400).send({ error: 'Url parameter is missing or invalid.'  });
-  }else if(url.indexOf('https')<0){
-    http
-      .get(url, getUrl)
-      .on('error', getUrlFailed);
   }else{
-    https
-      .get(url, getUrl)
-      .on('error', getUrlFailed);
+    request({
+      followAllRedirects: true,
+      url: url
+    }, function (error, response, body) {
+      var targetUrl = response.request.uri.href;
+      if (!error) {
+        console.log(response.request.uri);
+        console.log('Request @'+(new Date()));
+        console.log('-->'+url);
+        res.redirect(url);
+      }else{
+        console.log(error);
+      } //end if
+    });
   } //end if
-
-  function getUrl(response){
-    console.log('Request #'+req.connection.remoteAddress+'@'+(new Date()));
-    console.log('--->'+response.fetchedUrls[0]);
-    res.redirect(response.fetchedUrls[0])
-  } //end getUrl()
-
-  function getUrlFailed(error){
-    res.send(err);
-  } //end geturlFailed()
-  //res.set("Connection", "close");
 });
 
 app.listen(5000);
