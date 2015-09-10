@@ -38,8 +38,8 @@ app.get('/', function(req, res) {
       } //end if
       if (!error) {
         console.log('Request @'+(new Date()));
-        console.log('-->'+url);
-        res.redirect(url);
+        console.log('-->'+targetUrl);
+        res.redirect(targetUrl);
       }else{
         console.log(error);
       } //end if
