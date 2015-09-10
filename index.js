@@ -1,9 +1,7 @@
 var express = require('express'),
     cors = require('cors');
     app = express(),
-    http = require('follow-redirects').http,
     request = require('request'),
-    https = require('follow-redirects').https;
 
 process.on('uncaughtException', function(err){
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~');
