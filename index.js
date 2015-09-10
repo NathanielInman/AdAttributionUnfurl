@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
     }, function (error, response, body) {
       var targetUrl = response.request.uri.href;
       if(targetUrl.indexOf('https://play.google.com/store/apps/')>=0){
-        targetUrl.replace('https://play.google.com/store/apps/','market://');
+        targetUrl = targetUrl.replace('https://play.google.com/store/apps/','market://');
       } //end if
       if (!error) {
         console.log('Request @'+(new Date()));
