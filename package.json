@@ -1,15 +1,14 @@
 {
-  "name": "sev1node",
+  "name": "adAttributionUnfurl",
   "version": "1.0.0",
-  "description": "sev1 fix using node.js by Nathaniel Inman",
+  "description": "follow attribution links and find final link",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "deploy": "./lib/deploy_production.sh"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/n/a"
+    "url": "https://github.com/NathanielInman/ad-attribution-unfurl"
   },
   "keywords": [
     "nate",
@@ -24,12 +23,12 @@
   "author": "Nathaniel Inman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/n/a/issues"
+    "url": "https://github.com/NathanielInman/ad-attribution-unfurl/issues"
   },
-  "homepage": "https://github.com/n/a",
+  "homepage": "https://github.com/NathanielInman/ad-attribution-unfurl",
   "devDependencies": {
-    "cors": "^2.7.1",
-    "express": "^4.13.3",
-    "request": "^2.61.0"
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "request": "^2.87.0"
   }
 }
